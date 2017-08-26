@@ -8,68 +8,77 @@
 		</xfg:Gradient>
 	</xfg:ContentPageGloss.BackgroundGradient>
 	<ContentPage.Content>
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto">
-				</RowDefinition>
-				<RowDefinition Height="*">
-				</RowDefinition>
-				<RowDefinition Height="Auto	">
-				</RowDefinition>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition>
-				</ColumnDefinition>
-			</Grid.ColumnDefinitions>
-			<Image x:Name="BackgroundImageView" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="{Binding BackgroundImageUrl}" Aspect="AspectFill" Opacity="0.8"  />
-			<StackLayout Grid.Row="0">
-				<StackLayout HorizontalOptions="Center">
-					<Label Text="{Binding CityName}" XAlign="Center" Margin="0,50,0,0" FontSize="32" Style="{DynamicResource labelStyle}" />
-					<Label Text="{Binding WeatherDescription}" XAlign="Center" FontSize="22" Style="{DynamicResource labelStyle}" />
-					<Grid  Padding="0,50">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="5*" />
-							<ColumnDefinition Width="5*" />
-						</Grid.ColumnDefinitions>
-						<!--<Label Text="{Binding Icon}" Style="{DynamicResource labelStyle}" />-->
-						<Image Source="{Binding WeatherIcon}" Margin="0,0,10,0" Grid.Column="0" HorizontalOptions="End" Aspect="AspectFill" WidthRequest="64" HeightRequest="64"  />
-						<Label Text="{Binding Temperature}" Margin="10,0,0,0" Grid.Column="1" HorizontalOptions="Start" Style="{DynamicResource labelStyle}" FontSize="48"/>
-					</Grid>
+		<RelativeLayout>
+			<Grid RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1}">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto">
+					</RowDefinition>
+					<RowDefinition Height="*">
+					</RowDefinition>
+					<RowDefinition Height="Auto	">
+					</RowDefinition>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition>
+					</ColumnDefinition>
+				</Grid.ColumnDefinitions>
+				<Image x:Name="BackgroundImageView" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="{Binding BackgroundImageUrl}" Aspect="AspectFill" Opacity="0.8" />
+				<StackLayout Grid.Row="0">
+					<StackLayout HorizontalOptions="Center">
+						<Label Text="{Binding CityName}" XAlign="Center" Margin="0,50,0,0" FontSize="32" Style="{DynamicResource labelStyle}" />
+						<Label Text="{Binding WeatherDescription}" XAlign="Center" FontSize="22" Style="{DynamicResource labelStyle}" />
+						<Grid Padding="0,50">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="5*" />
+								<ColumnDefinition Width="5*" />
+							</Grid.ColumnDefinitions>
+							<!--<Label Text="{Binding Icon}" Style="{DynamicResource labelStyle}" />-->
+							<Image Source="{Binding WeatherIcon}" Margin="0,0,10,0" Grid.Column="0" HorizontalOptions="End" Aspect="AspectFill" WidthRequest="64" HeightRequest="64" />
+							<Label Text="{Binding Temperature}" Margin="10,0,0,0" Grid.Column="1" HorizontalOptions="Start" Style="{DynamicResource labelStyle}" FontSize="48" />
+						</Grid>
+					</StackLayout>
 				</StackLayout>
-			</StackLayout>
-			<ListView x:Name="listView" Grid.Row="1" HasUnevenRows="true" ItemsSource="{Binding DailyWeathers}" CachingStrategy="RecycleElement" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" BackgroundColor="Transparent">
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<ViewCell>
-							<xfg:CellGloss.BackgroundGradient>
-								<xfg:Gradient Rotation="100" x:Name="rotatingGradient">
-									<xfg:GradientStep StepColor="#fa3a0016" StepPercentage="0" />
-									<xfg:GradientStep StepColor="#aa84003e" StepPercentage=".2" />
-									<xfg:GradientStep StepColor="#aabd0059" StepPercentage=".5" />
-									<xfg:GradientStep StepColor="#aa84003e" StepPercentage=".75" />
-									<xfg:GradientStep StepColor="#fa71002b" StepPercentage="1" />
-								</xfg:Gradient>
-							</xfg:CellGloss.BackgroundGradient>
-							<StackLayout Orientation="Horizontal" Padding="10,10" BackgroundColor="Transparent">
-								<Label Text="Icon" HorizontalOptions="Start" VerticalOptions="Center" />
-								<StackLayout HorizontalOptions="FillAndExpand" Padding="20,0,0,0" VerticalOptions="FillAndExpand" Orientation="Vertical">
-									<Label Text="Friday" FontSize="24" Style="{DynamicResource labelStyle}" />
-									<Label Text="Partly Cloudy" FontSize="15" Style="{DynamicResource detailLabelStyle}" />
+				<ListView x:Name="listView" Grid.Row="1" HasUnevenRows="true" ItemsSource="{Binding DailyWeathers}" CachingStrategy="RecycleElement" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" BackgroundColor="Transparent">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<ViewCell>
+								<xfg:CellGloss.BackgroundGradient>
+									<xfg:Gradient Rotation="100" x:Name="rotatingGradient">
+										<xfg:GradientStep StepColor="#fa3a0016" StepPercentage="0" />
+										<xfg:GradientStep StepColor="#aa84003e" StepPercentage=".2" />
+										<xfg:GradientStep StepColor="#aabd0059" StepPercentage=".5" />
+										<xfg:GradientStep StepColor="#aa84003e" StepPercentage=".75" />
+										<xfg:GradientStep StepColor="#fa71002b" StepPercentage="1" />
+									</xfg:Gradient>
+								</xfg:CellGloss.BackgroundGradient>
+								<StackLayout Orientation="Horizontal" Padding="10,10" BackgroundColor="Transparent">
+									<Label Text="Icon" HorizontalOptions="Start" VerticalOptions="Center" />
+									<StackLayout HorizontalOptions="FillAndExpand" Padding="20,0,0,0" VerticalOptions="FillAndExpand" Orientation="Vertical">
+										<Label Text="Friday" FontSize="24" Style="{DynamicResource labelStyle}" />
+										<Label Text="Partly Cloudy" FontSize="15" Style="{DynamicResource detailLabelStyle}" />
+									</StackLayout>
+									<Label Text="91" HorizontalOptions="End" Margin="10,0" FontSize="48" VerticalOptions="Center" Style="{DynamicResource labelStyle}" />
+									<Label Text="75" HorizontalOptions="End" Margin="10,0" FontSize="32" VerticalOptions="Center" Style="{DynamicResource detailLabelStyle}" />
 								</StackLayout>
-								<Label Text="91" HorizontalOptions="End" Margin="10,0" FontSize="48" VerticalOptions="Center" Style="{DynamicResource labelStyle}" />
-								<Label Text="75" HorizontalOptions="End" Margin="10,0" FontSize="32" VerticalOptions="Center" Style="{DynamicResource detailLabelStyle}" />
-							</StackLayout>
-						</ViewCell>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
-			<StackLayout Orientation="Horizontal" Grid.Row="2" HeightRequest="50" Padding="10,20" BackgroundColor="#b92056">
-				<Button Font="FontAwesome" FontSize="32" TextColor="White" WidthRequest="48" HorizontalOptions="Start" VerticalOptions="Center" Text="" Command="{Binding MenuCommand}"></Button>
-				<Label Text="{Binding Message}" FontSize="13" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="White" />
-				<Button Font="FontAwesome" FontSize="32" TextColor="White" WidthRequest="48" HorizontalOptions="End" VerticalOptions="Center" Text="" Command="{Binding RefreshCommand}"></Button>
-
-				<!--<Label Text="Refresh" HorizontalOptions="End" VerticalOptions="Center" />-->
-			</StackLayout>
-		</Grid>
+							</ViewCell>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
+				<StackLayout Orientation="Horizontal" Grid.Row="2" HeightRequest="50" Padding="10,20" BackgroundColor="#b92056">
+					<Button Font="FontAwesome" FontSize="32" TextColor="White" WidthRequest="48" HorizontalOptions="Start" VerticalOptions="Center" Text="" Command="{Binding MenuCommand}">
+					</Button>
+					<Label Text="{Binding Message}" FontSize="13" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" TextColor="White" />
+					<Button Font="FontAwesome" FontSize="32" TextColor="White" WidthRequest="48" HorizontalOptions="End" VerticalOptions="Center" Text="" Command="{Binding RefreshCommand}">
+					</Button>
+					<!--<Label Text="Refresh" HorizontalOptions="End" VerticalOptions="Center" />-->
+				</StackLayout>
+			</Grid>
+			<Frame IsVisible="{Binding IsBusy}" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,Property=Width,Factor=1}" RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,Property=Height,Factor=1}" BackgroundColor="#aa000000">
+				<StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+					<ActivityIndicator Color="White" IsRunning="true" />
+					<Label Text="Please wait" TextColor="White" />
+				</StackLayout>
+			</Frame>
+		</RelativeLayout>
 	</ContentPage.Content>
 </ContentPage>

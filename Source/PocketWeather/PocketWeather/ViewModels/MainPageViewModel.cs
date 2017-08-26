@@ -35,7 +35,7 @@ namespace PocketWeather.ViewModels
 
     }
 
-    public async void OnNavigatedTo(NavigationParameters parameters)
+    public void OnNavigatedTo(NavigationParameters parameters)
     {
       Title = "Pocket Weather";
       HomeLand = "Saigon";
@@ -50,12 +50,8 @@ namespace PocketWeather.ViewModels
 
       this.DailyWeathers.AddRange(DailyWeather.Examples);
 
-      var result = await ApiService.GetCurrentWeather();
 
-      CityName = result.name;
-      WeatherDescription = $"{System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(result.weather[0].description)}. Wind: {result.wind.speed} m/s";
-      Temperature = $"{result.main.temp.ToString()}°";
-      WeatherIcon = ImageSource.FromUri(new Uri($"https://openweathermap.org/img/w/{result.weather[0].icon}.png"));
+      LoadData();
     }
 
     public void OnNavigatingTo(NavigationParameters parameters)
@@ -69,8 +65,7 @@ namespace PocketWeather.ViewModels
   {
     public ICommand RefreshCommand => new DelegateCommand(() =>
     {
-      LastUpdateTime = DateTime.Now;
-      Message = $"Updated {LastUpdateTime.ToString("MMMM dd, yyyy h:mm:ss tt")}";
+      LoadData();
     });
 
     public ICommand MenuCommand => new DelegateCommand(() =>
@@ -78,7 +73,32 @@ namespace PocketWeather.ViewModels
       _dialogService.DisplayAlertAsync("About", "This is DVLUP Final Project", "OK");
     });
 
+    private async void LoadData()
+    {
+      IsBusy = true;
+      try
+      {
+        var result = await ApiService.GetCurrentWeather();
+        CityName = result.name;
+        WeatherDescription = $"{System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(result.weather[0].description)}. Wind: {result.wind.speed} m/s";
+        Temperature = $"{result.main.temp.ToString()}°";
+        WeatherIcon = ImageSource.FromUri(new Uri($"https://openweathermap.org/img/w/{result.weather[0].icon}.png"));
 
+        ShowLatestMessage();
+      }
+      catch (Exception ex)
+      {
+        await _dialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+      }
+      IsBusy = false;
+    }
+
+
+    private void ShowLatestMessage()
+    {
+      LastUpdateTime = DateTime.Now;
+      Message = $"Updated {LastUpdateTime.ToString("MMMM dd, yyyy h:mm:ss tt")}";
+    }
   }
   #endregion
 
@@ -246,6 +266,19 @@ namespace PocketWeather.ViewModels
       set
       {
         SetProperty(ref _weatherIcon, value);
+      }
+    }
+
+    private bool _isBusy = false;
+    public bool IsBusy
+    {
+      get
+      {
+        return _isBusy;
+      }
+      set
+      {
+        SetProperty(ref _isBusy, value);
       }
     }
 
