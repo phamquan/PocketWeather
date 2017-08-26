@@ -7,16 +7,25 @@ using UIKit;
 
 namespace PocketWeather.iOS
 {
-    [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+  [Register("AppDelegate")]
+  public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+  {
+    public override bool FinishedLaunching(UIApplication app, NSDictionary options)
     {
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
-        {
-            global::Xamarin.Forms.Forms.Init();
+      Plugin.Iconize.Iconize.With(new Plugin.Iconize.Fonts.FontAwesomeModule());
+      //var t = Plugin.Iconize.Iconize.FindIconForKey("fa-refresh");
 
-            LoadApplication(new App());
+      global::Xamarin.Forms.Forms.Init();
 
-            return base.FinishedLaunching(app, options);
-        }
+      /********** ADD THIS CALL TO INITIALIZE XFGloss *********/
+      XFGloss.iOS.Library.Init();
+
+
+      FormsPlugin.Iconize.iOS.IconControls.Init();
+
+      LoadApplication(new App());
+
+      return base.FinishedLaunching(app, options);
     }
+  }
 }

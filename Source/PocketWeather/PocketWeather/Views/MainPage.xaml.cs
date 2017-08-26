@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using XFGloss;
 
 namespace PocketWeather.Views
 {
@@ -10,6 +11,8 @@ namespace PocketWeather.Views
     public MainPage()
     {
       InitializeComponent();
+
+      NavigationPage.SetHasNavigationBar(this, false);
     }
   }
 }
