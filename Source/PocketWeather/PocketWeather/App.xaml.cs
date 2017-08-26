@@ -1,29 +1,33 @@
-﻿using Xamarin.Forms;
+﻿using Prism.DryIoc;
+using Xamarin.Forms;
+using PocketWeather.Views;
 
 namespace PocketWeather
 {
-    public partial class App : Application
+  public partial class App
+  {
+
+    public App()
     {
-        public App()
-        {
-            InitializeComponent();
+      InitializeComponent();
 
-            MainPage = new PocketWeatherPage();
-        }
-
-        protected override void OnStart()
-        {
-            // Handle when your app starts
-        }
-
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
-
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
-        }
+      //MainPage = new PrismDemoPage();
     }
+
+    protected App(IPlatformInitializer platformInitializer = null) : base(platformInitializer)
+    {
+    }
+
+    protected override void OnInitialized()
+    {
+      NavigationService.NavigateAsync("Navigation/MainPage");
+    }
+
+    protected override void RegisterTypes()
+    {
+      Container.RegisterTypeForNavigation<NavigationPage>("Navigation");
+      Container.RegisterTypeForNavigation<AboutPage>("AboutPage");
+      Container.RegisterTypeForNavigation<MainPage>("MainPage");
+    }
+  }
 }

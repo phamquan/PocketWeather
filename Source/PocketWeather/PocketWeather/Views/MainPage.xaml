@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PocketWeather.Views.MainPage" Title="{Binding Title}">
+	<ContentPage.Content>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto">
+				</RowDefinition>
+				<RowDefinition Height="*">
+				</RowDefinition>
+				<RowDefinition Height="Auto	">
+				</RowDefinition>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition>
+				</ColumnDefinition>
+			</Grid.ColumnDefinitions>
+			<Image x:Name="BackgroundImageView" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="{Binding BackgroundImageUrl}" Aspect="AspectFill"/>
+			<StackLayout Grid.Row="0">
+				<StackLayout HorizontalOptions="Center">
+					<Label Text="Manila" XAlign="Center" Margin="0,50,0,0" FontSize="42" Style="{DynamicResource labelStyle}" />
+					<Label Text="Partly Cloudy. Wind: 11km" XAlign="Center" FontSize="22" />
+					<StackLayout Orientation="Horizontal" Padding="0,50">
+						<Label Text="Manila" Style="{DynamicResource labelStyle}"/>
+						<Label Text="Partly Cloudy" />
+					</StackLayout>
+				</StackLayout>
+			</StackLayout>
+			<ListView x:Name="listView" Grid.Row="1" HasUnevenRows="true" ItemsSource="{Binding DailyWeathers}" CachingStrategy="RecycleElement" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" BackgroundColor="Transparent">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<StackLayout Orientation="Horizontal" Padding="10,10" BackgroundColor="Transparent">
+								<Label Text="Icon" HorizontalOptions="Start" VerticalOptions="Center" />
+								<StackLayout HorizontalOptions="FillAndExpand" Padding="20,0,0,0" VerticalOptions="FillAndExpand" Orientation="Vertical">
+									<Label Text="Friday" FontSize="24"  Style="{DynamicResource labelStyle}"/>
+									<Label Text="Partly Cloudy" FontSize="15" Style="{DynamicResource detailLabelStyle}"/>
+								</StackLayout>
+								<Label Text="91" HorizontalOptions="End" FontSize="25" VerticalOptions="Center"  Style="{DynamicResource labelStyle}"/>
+								<Label Text="75" HorizontalOptions="End" FontSize="20" VerticalOptions="Center"  Style="{DynamicResource detailLabelStyle}"/>
+							</StackLayout>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+			<StackLayout Orientation="Horizontal" Grid.Row="2" HeightRequest="50" Padding="10,20">
+				<Label Text="Menu" HorizontalOptions="Start" VerticalOptions="Center"/>
+				<Label Text="Updated" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+				<Label Text="Refresh" HorizontalOptions="End" VerticalOptions="Center"/>
+			</StackLayout>
+		</Grid>
+	</ContentPage.Content>
+</ContentPage>

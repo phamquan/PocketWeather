@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -38,6 +38,18 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DryIoc, Version=2.10.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\DryIoc.dll.2.10.1\lib\portable-net45+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\DryIoc.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism, Version=6.3.0.0, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59">
+      <HintPath>..\packages\Prism.Core.6.3.0\lib\MonoAndroid10\Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.DryIoc.Forms, Version=6.3.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Prism.DryIoc.Forms.6.3.0.1\lib\MonoAndroid1.0\Prism.DryIoc.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="Prism.Forms, Version=6.3.0.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Prism.Forms.6.3.0\lib\MonoAndroid1.0\Prism.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -80,6 +92,36 @@
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\packages\Xamarin.Forms.2.3.4.267\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="SquaredInfinity.Comparers">
+      <HintPath>..\packages\SquaredInfinity.Comparers.2.0.6\lib\portable-net45+win\SquaredInfinity.Comparers.dll</HintPath>
+    </Reference>
+    <Reference Include="SquaredInfinity.ComponentModel">
+      <HintPath>..\packages\SquaredInfinity.ComponentModel.2.1.0\lib\portable-net45+win\SquaredInfinity.ComponentModel.dll</HintPath>
+    </Reference>
+    <Reference Include="SquaredInfinity.Disposables">
+      <HintPath>..\packages\SquaredInfinity.Disposables.2.0.10\lib\portable-net45+win\SquaredInfinity.Disposables.dll</HintPath>
+    </Reference>
+    <Reference Include="SquaredInfinity.Extensions">
+      <HintPath>..\packages\SquaredInfinity.Extensions.2.1.1\lib\portable-net45+win\SquaredInfinity.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="SquaredInfinity.Threading">
+      <HintPath>..\packages\SquaredInfinity.Threading.2.0.12\lib\portable-net45+win\SquaredInfinity.Threading.dll</HintPath>
+    </Reference>
+    <Reference Include="SquaredInfinity.Threading.Locks">
+      <HintPath>..\packages\SquaredInfinity.Threading.Locks.2.1.7\lib\portable-net45+win\SquaredInfinity.Threading.Locks.dll</HintPath>
+    </Reference>
+    <Reference Include="SquaredInfinity.BulkUpdates">
+      <HintPath>..\packages\SquaredInfinity.BulkUpdates.2.1.7\lib\portable-net45+win\SquaredInfinity.BulkUpdates.dll</HintPath>
+    </Reference>
+    <Reference Include="SquaredInfinity.Collections.Core">
+      <HintPath>..\packages\SquaredInfinity.Collections.Core.2.1.11\lib\portable-net45+win\SquaredInfinity.Collections.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="SquaredInfinity.Collections.CollectionEx">
+      <HintPath>..\packages\SquaredInfinity.Collections.CollectionEx.2.1.13\lib\portable-net45+win\SquaredInfinity.Collections.CollectionEx.dll</HintPath>
+    </Reference>
+    <Reference Include="SquaredInfinity.Collections.ObservableCollectionEx">
+      <HintPath>..\packages\SquaredInfinity.Collections.ObservableCollectionEx.2.1.10\lib\portable-net45+win\SquaredInfinity.Collections.ObservableCollectionEx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

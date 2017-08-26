@@ -1,6 +1,18 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PocketWeather.App">
+<?xml version="1.0" encoding="utf-8"?>
+<dryIoc:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:dryIoc="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms" x:Class="PocketWeather.App">
 	<Application.Resources>
 		<!-- Application resource dictionary -->
+		<ResourceDictionary>
+			<Color x:Key="primaryTextColor">White</Color>
+			<Color x:Key="secondaryTextColor">#33302E</Color>
+
+			<Style x:Key="labelStyle" TargetType="Label">
+            	<Setter Property="TextColor" Value="{DynamicResource primaryTextColor}" />
+        	</Style>
+
+			<Style x:Key="detailLabelStyle" TargetType="Label">
+				<Setter Property="TextColor" Value="{DynamicResource secondaryTextColor}" />
+        	</Style>
+        </ResourceDictionary>
 	</Application.Resources>
-</Application>
+</dryIoc:PrismApplication>
