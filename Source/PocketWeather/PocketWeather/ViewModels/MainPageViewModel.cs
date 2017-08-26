@@ -9,6 +9,7 @@ using System.Windows.Input;
 using Prism.Commands;
 using System;
 using Prism.Services;
+using PocketWeather.Api;
 
 namespace PocketWeather.ViewModels
 {
@@ -34,7 +35,7 @@ namespace PocketWeather.ViewModels
 
     }
 
-    public void OnNavigatedTo(NavigationParameters parameters)
+    public async void OnNavigatedTo(NavigationParameters parameters)
     {
       Title = "Pocket Weather";
       HomeLand = "Saigon";
@@ -49,6 +50,12 @@ namespace PocketWeather.ViewModels
 
       this.DailyWeathers.AddRange(DailyWeather.Examples);
 
+      var result = await ApiService.GetCurrentWeather();
+
+      CityName = result.name;
+      WeatherDescription = $"{System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(result.weather[0].description)}. Wind: {result.wind.speed} m/s";
+      Temperature = $"{result.main.temp.ToString()}°";
+      WeatherIcon = ImageSource.FromUri(new Uri($"https://openweathermap.org/img/w/{result.weather[0].icon}.png"));
     }
 
     public void OnNavigatingTo(NavigationParameters parameters)
@@ -187,6 +194,58 @@ namespace PocketWeather.ViewModels
       set
       {
         SetProperty(ref _message, value);
+      }
+    }
+
+    private String _cityName;
+    public String CityName
+    {
+      get
+      {
+        return _cityName;
+      }
+      set
+      {
+        SetProperty(ref _cityName, value);
+      }
+    }
+
+    private String _weatherDescription;
+    public String WeatherDescription
+    {
+      get
+      {
+        return _weatherDescription;
+      }
+      set
+      {
+        SetProperty(ref _weatherDescription, value);
+      }
+    }
+
+    private String _temperature;
+    public String Temperature
+    {
+      get
+      {
+        return _temperature;
+      }
+      set
+      {
+        SetProperty(ref _temperature, value);
+      }
+    }
+
+    private ImageSource _weatherIcon = null;
+    public ImageSource WeatherIcon
+    {
+      get
+      {
+        return _weatherIcon;
+      }
+      set
+      {
+        SetProperty(ref _weatherIcon, value);
       }
     }
 

@@ -21,15 +21,20 @@
 				<ColumnDefinition>
 				</ColumnDefinition>
 			</Grid.ColumnDefinitions>
-			<Image x:Name="BackgroundImageView" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="{Binding BackgroundImageUrl}" Aspect="AspectFill" Opacity="0.2" />
+			<Image x:Name="BackgroundImageView" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="{Binding BackgroundImageUrl}" Aspect="AspectFill" Opacity="0.8"  />
 			<StackLayout Grid.Row="0">
 				<StackLayout HorizontalOptions="Center">
-					<Label Text="Manila" XAlign="Center" Margin="0,50,0,0" FontSize="42" Style="{DynamicResource labelStyle}" />
-					<Label Text="Partly Cloudy. Wind: 11km" XAlign="Center" FontSize="22" Style="{DynamicResource labelStyle}" />
-					<StackLayout Orientation="Horizontal" Padding="0,50">
-						<Label Text="Manila" Style="{DynamicResource labelStyle}" />
-						<Label Text="Partly Cloudy" Style="{DynamicResource labelStyle}"/>
-					</StackLayout>
+					<Label Text="{Binding CityName}" XAlign="Center" Margin="0,50,0,0" FontSize="32" Style="{DynamicResource labelStyle}" />
+					<Label Text="{Binding WeatherDescription}" XAlign="Center" FontSize="22" Style="{DynamicResource labelStyle}" />
+					<Grid  Padding="0,50">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="5*" />
+							<ColumnDefinition Width="5*" />
+						</Grid.ColumnDefinitions>
+						<!--<Label Text="{Binding Icon}" Style="{DynamicResource labelStyle}" />-->
+						<Image Source="{Binding WeatherIcon}" Margin="0,0,10,0" Grid.Column="0" HorizontalOptions="End" Aspect="AspectFill" WidthRequest="64" HeightRequest="64"  />
+						<Label Text="{Binding Temperature}" Margin="10,0,0,0" Grid.Column="1" HorizontalOptions="Start" Style="{DynamicResource labelStyle}" FontSize="48"/>
+					</Grid>
 				</StackLayout>
 			</StackLayout>
 			<ListView x:Name="listView" Grid.Row="1" HasUnevenRows="true" ItemsSource="{Binding DailyWeathers}" CachingStrategy="RecycleElement" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" BackgroundColor="Transparent">

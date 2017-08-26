@@ -33,6 +33,10 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\DailyWeather.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\OpenWeather.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Api\ApiService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Api\IOpenWeatherService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
@@ -41,5 +45,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\" />
     <Folder Include="$(MSBuildThisFileDirectory)Assets\Background\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Api\" />
   </ItemGroup>
 </Project>
