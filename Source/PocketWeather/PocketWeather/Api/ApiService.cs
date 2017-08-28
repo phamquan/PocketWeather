@@ -21,5 +21,11 @@ namespace PocketWeather.Api
       var apiService = RestService.For<IOpenWeatherService>(Constants.HttpClient);
       return apiService.GetCurrentWeather("1566083", "metric", Token);
     }
+
+    internal static Task<ExampleForecast> GetForecastWeather()
+    {
+      var apiService = RestService.For<IOpenWeatherService>(Constants.HttpClient);
+      return apiService.GetForecastWeather("1566083", "metric", Token);
+    }
   }
 }

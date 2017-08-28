@@ -37,6 +37,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Api\ApiService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Api\IOpenWeatherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ForecastWeather.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />

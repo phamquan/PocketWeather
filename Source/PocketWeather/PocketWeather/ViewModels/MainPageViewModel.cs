@@ -8,8 +8,11 @@ using FormsPlugin.Iconize;
 using System.Windows.Input;
 using Prism.Commands;
 using System;
+using System.Linq;
 using Prism.Services;
 using PocketWeather.Api;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PocketWeather.ViewModels
 {
@@ -41,14 +44,7 @@ namespace PocketWeather.ViewModels
       HomeLand = "Saigon";
       BackgroundImageUrl = ImageSource.FromResource(Assembly.GetExecutingAssembly().GetName().Name + ".Assets.Background.bg_rain.jpg");
 
-      var icn = new IconImage();
-      icn.Icon = "fa-refresh";
-      icn.IconColor = Color.White;
-      icn.IconSize = 15;
-
-      RefreshImageSource = icn.Source;
-
-      this.DailyWeathers.AddRange(DailyWeather.Examples);
+      //this.DailyWeathers.AddRange(DailyWeather.Examples);
 
 
       LoadData();
@@ -63,9 +59,9 @@ namespace PocketWeather.ViewModels
   #region COMMANDS
   public partial class MainPageViewModel
   {
-    public ICommand RefreshCommand => new DelegateCommand(() =>
+    public ICommand RefreshCommand => new DelegateCommand(async () =>
     {
-      LoadData();
+      await LoadData();
     });
 
     public ICommand MenuCommand => new DelegateCommand(() =>
@@ -73,7 +69,7 @@ namespace PocketWeather.ViewModels
       _dialogService.DisplayAlertAsync("About", "This is DVLUP Final Project", "OK");
     });
 
-    private async void LoadData()
+    private async Task LoadData()
     {
       IsBusy = true;
       try
@@ -83,6 +79,9 @@ namespace PocketWeather.ViewModels
         WeatherDescription = $"{System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(result.weather[0].description)}. Wind: {result.wind.speed} m/s";
         Temperature = $"{result.main.temp.ToString()}°";
         WeatherIcon = ImageSource.FromUri(new Uri($"https://openweathermap.org/img/w/{result.weather[0].icon}.png"));
+
+        var foreCastResult = await ApiService.GetForecastWeather();
+        UpdateForecast(foreCastResult.list);
 
         ShowLatestMessage();
       }
@@ -98,6 +97,22 @@ namespace PocketWeather.ViewModels
     {
       LastUpdateTime = DateTime.Now;
       Message = $"Updated {LastUpdateTime.ToString("MMMM dd, yyyy h:mm:ss tt")}";
+    }
+
+    private void UpdateForecast(IList<ListInfo> listInfo)
+    {
+      var l = listInfo.Select(_ => new DailyWeather
+      {
+        dt = _.dt,
+        Temp = _.temp.day,
+        TempMax = _.temp.max,
+        TempMin = _.temp.min,
+        Main = _.weather[0].main,
+        WeatherIcon = $"https://openweathermap.org/img/w/{_.weather[0].icon}.png"
+      });
+
+      DailyWeathers.Clear();
+      DailyWeathers.AddRange(l);
     }
   }
   #endregion
